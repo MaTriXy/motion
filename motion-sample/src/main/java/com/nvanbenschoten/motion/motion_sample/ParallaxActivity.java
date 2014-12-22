@@ -1,12 +1,10 @@
 package com.nvanbenschoten.motion.motion_sample;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.pm.ActivityInfo;
 import android.graphics.BitmapFactory;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,14 +19,15 @@ import android.widget.Switch;
 import com.nvanbenschoten.motion.ParallaxImageView;
 
 
-public class ParallaxActivity extends ActionBarActivity {
+public class ParallaxActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parallax);
+
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.container, new ParallaxFragment())
                     .commit();
         }
@@ -45,7 +44,7 @@ public class ParallaxActivity extends ActionBarActivity {
 
         private int mCurrentImage;
         private boolean mParallaxSet = true;
-        private boolean mPortraitLock = false;
+        private boolean mPortraitLock = true;
 
         public ParallaxFragment() { }
 
@@ -99,13 +98,13 @@ public class ParallaxActivity extends ActionBarActivity {
             super.onResume();
 
             if (mParallaxSet)
-                mBackground.registerSensorManager((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE));
+                mBackground.registerSensorManager();
         }
 
         @Override
         public void onPause() {
-            super.onPause();
             mBackground.unregisterSensorManager();
+            super.onPause();
         }
 
         @Override
@@ -121,7 +120,7 @@ public class ParallaxActivity extends ActionBarActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        mBackground.registerSensorManager((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE));
+                        mBackground.registerSensorManager();
                     } else {
                         mBackground.unregisterSensorManager();
                     }
@@ -135,6 +134,7 @@ public class ParallaxActivity extends ActionBarActivity {
 
             // Set lock/ unlock orientation text
             if (mPortraitLock) {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 MenuItem orientationItem = menu.findItem(R.id.action_portrait);
                 if (orientationItem != null)
                     orientationItem.setTitle(R.string.action_unlock_portrait);
@@ -176,5 +176,7 @@ public class ParallaxActivity extends ActionBarActivity {
                 mBackground.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.background_rocket_small));
             }
         }
+
     }
+
 }
