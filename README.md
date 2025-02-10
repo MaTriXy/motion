@@ -1,4 +1,4 @@
-Motion
+Motion [ ![Download](https://api.bintray.com/packages/nvanbenschoten/maven/com.nvanbenschoten.motion%3Alibrary/images/download.svg) ](https://bintray.com/nvanbenschoten/maven/com.nvanbenschoten.motion%3Alibrary/_latestVersion)
 ======
 
 An Android library allowing images to exhibit a parallax effect. By replacing static pictures
@@ -30,26 +30,26 @@ build path.
 **Or**:
 
 Add the following to your `build.gradle`:
+```java
+repositories {
+	jcenter()
+}
 
-	repositories {
-		mavenCentral()
-	}
-
-	dependencies{
-		compile 'com.nvanbenschoten.motion:library:1.0.2'
-	}
-
+dependencies{
+	compile 'com.nvanbenschoten.motion:library:1.1.2'
+}
+```
 **Or**:
 
 Add the following to your `pom.xml`:
-
-	<dependency>
-		<groupId>com.nvanbenschoten.motion</groupId>
-		<artifactId>library</artifactId>
-		<version>1.0.2</version>
-		<type>aar</type>
-	</dependency>
-
+```xml
+<dependency>
+	<groupId>com.nvanbenschoten.motion</groupId>
+	<artifactId>library</artifactId>
+	<version>1.1.2</version>
+	<type>aar</type>
+</dependency>
+```
 Usage
 -----
 
@@ -82,19 +82,16 @@ mBackground.unregisterSensorManager();
 Configurations
 --------------
 
-There are four attributes that can be changed to adjust the parallax effect of the ImageView.
+There are three attributes that can be changed to adjust the parallax effect of the ImageView.
 Each can be accessed either through XML attributes or through Java functions.
 
-* parallaxIntensity (float) - adjusts the strength of the parallax effect, giving control over the
+* intensity (attr:motionIntensity) (float) - adjusts the strength of the parallax effect, giving control over the
 perceived depth of the view.
 
-* tiltSensitivity (float) - adjusts the sensitivity of the view towards tilting, changing how quickly
+* tiltSensitivity (attr:motionTiltSensitivity) (float) - adjusts the sensitivity of the view towards tilting, changing how quickly
 the parallax's bounds are reached.
 
-* forwardTiltOffset (float) - adjusts the tilt offset used to counteract a natural forward tilt of
-a phone while facing a user.
-
-* scaledIntensity (boolean) - adjusts whether the ImageView's x and y axis' parallax intensities
+* scaledIntensity (attr:motionScaledIntensity) (boolean) - adjusts whether the ImageView's x and y axis' parallax intensities
 are scaled to the image's aspect ratio or equal to each other and to the smaller of the axis'
 intensities (false by default).
 
@@ -116,4 +113,4 @@ License
     limitations under the License.
 
  [1]: https://github.com/nvanbenschoten/motion/releases
- [2]: https://github.com/nvanbenschoten/motion/releases/download/v1.0.1/com.nvanbenschoten.motion-1.0.1.jar
+ [2]: https://github.com/nvanbenschoten/motion/releases/download/v1.1.2/com.nvanbenschoten.motion-1.1.2.jar
